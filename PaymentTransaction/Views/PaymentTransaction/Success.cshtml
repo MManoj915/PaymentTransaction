@@ -1,0 +1,73 @@
+﻿@model PaymentTransaction.Models.PaymentPostingModel
+
+@{
+    ViewBag.Title = "Success"; 
+    Layout= "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+<br>
+<div class="container">
+    <div class="pad margin no-print">
+        <div class="callout callout-info" style="margin-bottom: 0!important;border-color:#00c0ef !important">
+            <h4>Reference No: @Model.MerchantorderNo</h4>
+        </div>
+    </div>
+
+    <section class="invoice">
+        <!-- title row -->
+        <div class="row">
+            <div class="col-xs-12">
+                <h2 class="page-header">
+                    <i class="fa fa-globe"></i> National General Insurance
+                </h2>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- info row -->
+        <div class="row invoice-info">
+            <div class="col-sm-4 invoice-col">
+                Receipt From
+                <address>
+                    <strong>National General Insurance Co. (PSC)</strong><br>
+                    PO Box 154,<br>
+                    Levels Ground, 3, 5, 6, NGI House,<br>
+                    Port Saeed Street, Deira Dubai<br>
+                    Dubai – United Arab Emirates
+                </address>
+            </div>
+            <div class="col-sm-8">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th>Payment Date:</th>
+                            <td>@Model.PaymentDate</td>
+                        </tr>
+                        <tr>
+                            <th>Card Type</th>
+                            <td>@Model.CardType</td>
+                        </tr>
+                        <tr>
+                            <th>Curency:</th>
+                            <td>@Model.Currency</td>
+                        </tr>
+                        <tr>
+                            <th>Total:</th>
+                            <td>@Model.TotalAmount</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12">
+                <p class="text-muted well well-sm no-shadow" style="margin-top: 10px;">
+                    This receipt generated for payment confirmation. You will receive Tax Invoice and CHI shortly to your Registered Email ID. For Further details please contact NGI..
+                </p>
+            </div>
+        </div>
+    </section>
+
+</div>

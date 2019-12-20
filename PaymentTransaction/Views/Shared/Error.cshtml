@@ -1,0 +1,143 @@
+﻿@model PaymentTransaction.Models.LoginModel
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Log in</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="~/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="~/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/plugins/iCheck/square/blue.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <style type="text/css">
+        .p-t-50 {
+            padding-top: 150px;
+        }
+
+        .eumsg {
+            color: red;
+        }
+
+        .epmsg {
+            color: red;
+        }
+
+        .hidden {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body class="hold-transition login-page" style="height:70%;background-image: url('/ProviderProfile/images/ngi-hq.jpg')">
+    @using (Html.BeginForm("ValidateCredential", "Login", FormMethod.Post, new { id = "Login", role = "form", enctype = "multipart/form-data" }))
+    {
+
+        <div class="login-box p-t-50">
+            <!-- /.login-logo -->
+            <div class="login-box-body">
+                <p class="login-box-msg">Sign in</p>
+                <form>
+                    <div class="form-group has-feedback">
+                        @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", id = "UserName", @placeholder = "User Name" })
+                        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        <p><span id="eumsg" class="eumsg hidden">@TempData["UserNameError"]</span></p>
+                        @*<span style="font-size:13px">User Name will be Member Card No (Eg:41322015N200820001)</span>*@
+                    </div>
+                    <div class="form-group has-feedback">
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", id = "Password", @placeholder = "Password" })
+                        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        <p><span id="epmsg" class="epmsg hidden">@TempData["PasswordError"]</span></p>
+                        @*<span style="font-size:13px">Password is the First 4 Letters of the member’s name in upper case, and date of birth (Eg:ZEES26031992)</span>*@
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-8">
+                            @Html.CheckBoxFor(m => m.Remember, new { id = "Remember" })
+                            @Html.LabelFor(m => m.Remember)
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-xs-4">
+                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        </div>
+                        <!-- /.col -->
+                    </div>
+                </form>
+
+            </div>
+            <!-- /.login-box-body -->
+        </div>
+    <!-- /.login-box -->
+    <!-- jQuery 3 -->
+        <script src="~/bower_components/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap 3.3.7 -->
+        <script src="~/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+        //<script type="text/javascript" src="~/bower_components/bootstrap/dist/js/code.min.js"></script>
+    <!-- iCheck -->
+    }
+    <script>
+        $('#Password').on('keypress keydown keyup', CheckRegexCharacters);
+        $('#UserName').on('keypress keydown keyup', CheckRegexCharacters);
+        function CheckRegexCharacters() {
+            var $regexname = /^[^'"]*$/;
+            var $regexname1 = /^[\S]*$/;
+            if (!$(this).val().match($regexname) || !$(this).val().match($regexname1)) {
+                // there is a mismatch, hence show the error message
+                if ($(this)[0].id == "Password") {
+                    $('#epmsg')[0].innerHTML = 'Please enter a valid password';
+                    $('.epmsg').removeClass('hidden');
+                    $('.epmsg').show();
+                }
+                if ($(this)[0].id == "UserName") {
+                    $('#eumsg')[0].innerHTML = 'Please enter a valid username';
+                    $('.eumsg').removeClass('hidden');
+                    $('.eumsg').show();
+                }
+            }
+            else {
+                // else, do not display message
+                if (($(this)[0].id == "UserName")) {
+                    $('#eumsg')[0].innerHTML = '';
+                    $('.eumsg').addClass('hidden');
+                }
+                if (($(this)[0].id == "Password")) {
+                    $('#epmsg')[0].innerHTML = '';
+                    $('.epmsg').addClass('hidden');
+                }
+            }
+        }
+
+        $(document).ready(function () {
+            if ('@TempData["PasswordError"]' != '') {
+                $('.epmsg').removeClass('hidden');
+                $('.epmsg').show();
+            }
+            if ('@TempData["UserNameError"]' != '') {
+                $('.eumsg').removeClass('hidden');
+                $('.eumsg').show();
+            }
+
+        });
+
+    </script>
+</body>
+</html>

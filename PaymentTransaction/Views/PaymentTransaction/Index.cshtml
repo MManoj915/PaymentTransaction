@@ -1,0 +1,93 @@
+﻿@model PaymentTransaction.Models.ClientInformationModel
+@using Newtonsoft.Json
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+
+    <div class="pad margin no-print">
+        <div class="callout callout-info" style="margin-bottom: 0!important;border-color:#00c0ef !important">
+            <h4> Kindly find your  details below :</h4>
+        </div>
+    </div>
+
+    <section class="invoice">
+        <!-- info row -->
+        <form id="ProviderInfo">
+            <div class="row invoice-info">
+                <div class="col-sm-12">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th>First Name:</th>
+                                <td>@Model.FirstName</td>
+                            </tr>
+                            <tr>
+                                <th>Last Name</th>
+                                <td>@Model.LastName</td>
+                            </tr>
+                            <tr>
+                                <th>Email ID:</th>
+                                <td>@Model.EmailId</td>
+                            </tr>
+                            <tr>
+                                <th>Mobile No:</th>
+                                <td>@Model.MobileNo</td>
+                            </tr>
+                            <tr>
+                                <th>Amount:</th>
+                                <td>@Model.Amount</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            @{
+                if (Model.PayStatus == "1")
+                {
+                    if (Model.TimeDifference > 60)
+                    {
+                        <div class="col-sm-12">
+                            <span id="lblError" style="color: red;">Provided URL is expired.Kindly contact NGI</span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-sm-12 text-center button-padding">
+                            <input type="button" id="btnShow" style='margin-right:5px' class="btn btn-success" value="Proceed" onclick="ProceedTransaction()" />
+                            <input type="button" id="btnCancel" class="btn btn-danger" value="Cancel" onclick="Show()" />
+                        </div>
+
+                    }
+                }
+                else if (Model.PayStatus == "2")
+                {
+                    <div class="col-sm-12">
+                        <span id="lblError" style="color: red;">Payment inprogess. For further Clarification kindly contact NGI</span>
+                    </div>
+                }
+                else if (Model.PayStatus == "3")
+                {
+                    <div class="col-sm-12">
+                        <span id="lblError" style="color: red;">Payment already done for this Transaction.</span>
+                    </div>
+                }
+            }
+
+
+        </div>
+    </section>
+
+</div>
+
+<script>
+
+    function ProceedTransaction() {
+        var RedirectUrl = "@Url.Action("Proceed", "PaymentTransaction")";
+        window.location.href = RedirectUrl;
+    }
+</script>

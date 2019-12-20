@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Payment</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Awsomefonts")
+    @Styles.Render("~/Content/skin-blue")
+    @Styles.Render("~/Content/kendocss")
+
+    @Scripts.Render("~/bundles/jqueryJS")
+    @Scripts.Render("~/bundles/bootstrapJS")
+
+
+    @{
+
+        @Styles.Render("~/Content/AdminLTE")
+        @Scripts.Render("~/bundles/AdminLTEJS")
+        <link href="~/Content/CustomTemplate/dist/css/ltr_common.css" rel="stylesheet" />
+
+    }
+
+    @Styles.Render("~/Content/customcss")
+    @Styles.Render("~/Content/prerequsitecss")
+    @Scripts.Render("~/bundles/kendojs")
+    @Scripts.Render("~/bundles/respond")
+
+    <script src="~/Content/CustomTemplate/plugins/raphael/raphael.min.js"></script>
+    <script src="~/Content/CustomTemplate/plugins/morris/morris.min.js"></script>
+    <script src="~/Content/CustomTemplate/plugins/fastclick/fastclick.min.js"></script>
+
+    @Scripts.Render("~/bundles/jqueryvalJS")
+
+    <style>
+        .navbar-nav > .notifications-menu > .dropdown-menu, .navbar-nav > .messages-menu > .dropdown-menu, .navbar-nav > .tasks-menu > .dropdown-menu {
+            width: 600px;
+            padding: 0 0 0 0;
+            margin: 0;
+            top: 100%;
+        }
+
+        .main-sidebar-scroll {
+            overflow-y: auto;
+            height: calc(100vh - 135px);
+            overflow-x: hidden;
+        }
+    </style>
+
+    <script type="text/javascript">
+        window.history.forward(-1);
+
+    </script>
+    <script src="@Url.Content("~/Content/custom_common.js")"></script>
+    @*<script src="@Url.Content("~/Scripts/kendo/2018.1.221/jszip.min.js")"></script>*@
+    <script src="~/Content/Kendo/js/jszip.min.js"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+
+    <script src="~/Content/Kendo/js/Kendo.Culture.en-US.js"></script>
+
+</head>
+
+<body oncontextmenu="return false;" class="skin-blue fixed sidebar-mini">
+    <div class="wrapper">
+        <!-- Main Header -->
+        <header class="main-header">
+
+
+
+
+
+            <!-- Header Navbar -->
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-left:0px;background-color:#ecf0f5 !important;text-align:center">
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg">
+                    <img src="/PaymentConfirmation/Content/CustomTemplate/dist/img/Logo/Logo.jpg" style="max-height:100px;width:300px;">
+                </span>
+                </a>
+
+            </nav>
+        </header>
+
+
+        <div class="content-wrapper">
+            <section class="content">
+                @RenderBody()
+            </section>
+        </div>
+
+        @*<footer class="main-footer">
+                <!-- To the right -->
+                <div class="pull-right hidden-xs">
+                    We will take care
+                </div>
+                <strong>NGI &copy; 2017 <a href="#">Company</a>.</strong> All rights reserved.
+            </footer>*@
+
+
+        <div class="control-sidebar-bg"></div>
+    </div>
+
+
+
+
+</body>
+
+
+
+</html>
